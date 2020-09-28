@@ -30,26 +30,3 @@ print("File has been recived.")
 
 
 
-"""with open(filename, 'wb') as file:
-    data = file.recv(1024)
-    totalRecv = len(data)
-    file.write(data)
-    while totalRecv < filesize:
-        data = s.recv(1024)
-        totalRecv += len(data)
-        file.write(data)
-        print ("{0:.2f}".format((totalRecv/float(filesize))*100)+ "% Done")
-    print ("Download Complete!")
-    file.close()
-
-
-
-    with open(filename, 'wb') as file:
-    chunk_size=1024
-    totalrecived = 0
-    while totalrecived < filesize:
-        chunk_file=s.recv(chunk_size)
-        file.write(chunk_file)
-        chunk_file=s.recv(chunk_size)
-        totalrecived = len(filename)
-file.close()"""

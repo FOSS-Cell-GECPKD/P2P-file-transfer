@@ -27,20 +27,3 @@ print("Data has been transmitted successfully")
 
 
 
-"""with open(filename, 'rb') as f:
-    bytesToSend = f.read(1024)
-    s.send(bytesToSend)
-    while bytesToSend != "":
-        bytesToSend = f.read(1024)
-        s.send(bytesToSend)
-
-    s.close()
-
-
-    with open(filename, 'rb') as file:
-    chunk_size=1024
-    chunk_file=file.read(chunk_size)
-    while chunk_file != "":
-        conn.send(chunk_file)
-        chunk_file=file.read(chunk_size)
-file.close()"""
