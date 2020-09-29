@@ -8,16 +8,18 @@ print(" Connected to the host... ")
 filename=s.recv(1024)
 filename=filename.decode()
 size=s.recv(1024)
-size=size.decode()
-print("name of the file ="+filename)
+size=int(size.decode())
+print("name of the file = "+filename)
+print("This may take few seconds...")
 with open(filename, 'wb') as file:
     chunk_size=1024
     chunk_file=s.recv(chunk_size)
-    file_size=1024
-    while file_size<int(size):
-        file.write(chunk_file)
+    file.write(chunk_file)
+    file_size=len(chunk_file)
+    while file_size < size:
         chunk_file=s.recv(chunk_size)
-        file_size+=chunk_size
+        file.write(chunk_file)
+        file_size+=len(chunk_file)
     
 """file=open(filename,'wb')
 file_data=s.recv(25*1024)
