@@ -8,9 +8,10 @@ host=input(str("Enter the host address of the senter : "))
 port=8080
 s.connect((host,port))
 print(" Connected to the host... ")
-filename=input(str("please enter a filename for the incoming file : "))
-filesize = str(s.recv(10))
-filesize=int(filesize[2:-1])
+filename=s.recv(1024)
+filename=filename.decode()
+filesize=s.recv(1024)
+filesize=int(filesize.decode())
 print (filesize)
 print(type(filesize))
 with open(filename, 'wb') as file:
@@ -27,6 +28,3 @@ with open(filename, 'wb') as file:
 file.close()
 
 print("File has been recived.")
-
-
-

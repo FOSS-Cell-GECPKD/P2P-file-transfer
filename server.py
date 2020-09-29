@@ -13,7 +13,10 @@ print("Waiting for a connection")
 conn, addr =s.accept()
 print(addr, "has connected to the system")
 filename=input(str("Please enter the filename of the file : "))
-conn.send(bytes(str(os.path.getsize(filename)),'utf-8'))
+conn.send(filename.encode())
+size = os.path.getsize(filename)
+size=str(size)
+conn.send(size.encode())
 with open(filename, 'rb') as file:
     chunk_size=1024
     chunk_file=file.read(chunk_size)
@@ -22,8 +25,4 @@ with open(filename, 'rb') as file:
         chunk_file=file.read(chunk_size)
 file.close()
 print("Data has been transmitted successfully")
-
-
-
-
 
