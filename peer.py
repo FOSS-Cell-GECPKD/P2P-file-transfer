@@ -1,5 +1,5 @@
-import server
-import client
+import send
+import recive
 
 def menu():
     choice=input("""
@@ -7,9 +7,9 @@ def menu():
                 R: Receive a file
                 Please enter your choice (S/R):""")
     if choice=="S" or choice=="s":
-        server.send_file()
+        send.send_file()
     elif choice=="R" or choice=="r":
-        client.receive_file()
+        recive.receive_file()
     else:
         print("You must only select either S or R")
         print("please try again")
@@ -17,8 +17,6 @@ def menu():
 
 def main():
     menu()
-    ans=input("Do you want to continue [y/n]? ")
-    if ans=="Y" or ans=="y":
-        main()
 
-main()
+if __name__ =="__main__":
+    main()
