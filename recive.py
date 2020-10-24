@@ -1,8 +1,10 @@
 import socket
 import os
 
-
 # from requests import get
+import send
+
+
 def yesorno(s):
     ans = input(str("\nY-Yes N-No->"))
     if ans == 'y' or ans == 'Y':
@@ -67,5 +69,15 @@ def file(s):
     yesorno(s)
 
 
-def receive_file():
-    file(connection())
+def send_or_recv(s):
+    ans = str(s.recv(1024).decode())
+    if ans == "S":
+        file(s)
+    elif ans == "R":
+        send.choose_file(s)
+
+
+def join_network():
+    s = connection()
+    send_or_recv(s)
+    file()

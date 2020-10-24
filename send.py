@@ -4,6 +4,8 @@ import os
 # from requests import get
 import urllib.request
 
+import recive
+
 
 def get_ip():
     ip = socket.gethostname()
@@ -39,7 +41,7 @@ def end_connection(conn):
             exit()
 
 
-def choose_file(conn, addr, s):
+def choose_file(conn):
     filename = input(str("Please enter the path of the file : "))
     try:
         conn.send(filename.encode())
@@ -64,7 +66,7 @@ def choose_file(conn, addr, s):
             ans = conn.recv(1024)
             ans = str(ans.decode())
             if ans == "Y" or ans == "y":
-                choose_file(conn, addr, s)
+                choose_file(conn)
             else:
                 print("!!Exiting!!")
                 end_connection()
@@ -72,10 +74,26 @@ def choose_file(conn, addr, s):
         print("Do you want to try again?")
         ans = input(str("\nY-Yes N-No->"))
         if ans == 'y' or ans == 'Y':
-            choose_file(conn, addr, s)
+            choose_file(conn)
         elif ans == 'N' or ans == 'n':
             print("Closing connection")
             end_connection()
+
+
+def send_or_recive(conn):
+    choice = input("""
+                    S: Send a file
+                    R: Receive a file
+                    Please enter your choice (S/R):""")
+    if choice == "S" or choice == "s":
+        conn.send("S".encode())
+        choose_file(conn)
+    elif choice == "R" or choice == "r":
+        conn.send("R".encode())
+        recive.file(conn)
+    else:
+        print("You must only select either S or R")
+        print("please try again")
 
 
 def socket_connection():
@@ -90,7 +108,7 @@ def socket_connection():
 
         print(addr, "has connected to the system")
 
-        choose_file(conn, addr, s)
+        send_or_recive(conn)
     except:
         print("Connection error")
         print("Do you want to try again?")
@@ -102,6 +120,6 @@ def socket_connection():
             exit()
 
 
-def send_file():
+def create_network():
     get_ip()
     socket_connection()

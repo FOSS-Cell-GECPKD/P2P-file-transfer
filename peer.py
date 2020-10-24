@@ -4,13 +4,13 @@ import recive
 
 def menu():
     choice = input("""
-                S: Send a file
-                R: Receive a file
-                Please enter your choice (S/R):""")
-    if choice == "S" or choice == "s":
-        send.send_file()
-    elif choice == "R" or choice == "r":
-        recive.receive_file()
+                C: Create network
+                J: Join network
+                Please enter your choice (C/J):""")
+    if choice == "C" or choice == "c":
+        send.create_network()
+    elif choice == "J" or choice == "j":
+        recive.join_network()
     else:
         print("You must only select either S or R")
         print("please try again")
