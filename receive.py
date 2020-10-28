@@ -12,11 +12,11 @@ def open_connection():  # connecting to the host
         s.connect((host, port))
         print(" Connected to the host... ")
         return s
-    except:
+    except:  # port busy error
         print("Connection error do you want to try again?")
         ans = input(str("\nY-Yes N-No->"))
         if ans == 'y' or ans == 'Y':
-            return open_connection()
+            return open_connection()  # Trying again to check whether port is free
         elif ans == 'N' or ans == 'n':
             exit()
 
