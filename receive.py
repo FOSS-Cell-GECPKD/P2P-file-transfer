@@ -5,20 +5,13 @@ from peer import main
 
 
 def open_connection():  # connecting to the host
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        host = input(str("Enter the host address of the sender : "))
-        port = 8080
-        s.connect((host, port))
-        print(" Connected to the host... ")
-        return s
-    except:  # port busy error
-        print("Connection error do you want to try again?")
-        ans = input(str("\nY-Yes N-No->"))
-        if ans == 'y' or ans == 'Y':
-            return open_connection()  # Trying again to check whether port is free
-        elif ans == 'N' or ans == 'n':
-            exit()
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    host = input(str("Enter the host address of the sender : "))
+    port = 8080
+    s.connect((host, port))
+    print(" Connected to the host... ")
+    return s
+
 
 
 def receive_file(s):  # Receive file from other peer
