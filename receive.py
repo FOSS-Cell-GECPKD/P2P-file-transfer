@@ -16,7 +16,6 @@ def open_connection():  # connecting to the host
         print("Port busy try again later")
 
 
-
 def receive_file(s):  # Receive file from other peer
     file_name = s.recv(1024)
     file_name = file_name.decode()
