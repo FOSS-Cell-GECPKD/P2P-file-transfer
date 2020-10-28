@@ -1,23 +1,11 @@
-import socket
 import os
+import socket
 
-# from requests import get
 import send
+from peer import main
 
 
-def yesorno(s):
-    ans = input(str("\nY-Yes N-No->"))
-    if ans == 'y' or ans == 'Y':
-        ans = 'Y'
-        s.send(ans.encode())
-        file(s)
-    elif ans == 'N' or ans == 'n':
-        ans = 'N'
-        s.send(ans.encode())
-        s.close()
-
-
-def connection():
+def open_connection():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         host = input(str("Enter the host address of the senter : "))
@@ -29,12 +17,12 @@ def connection():
         print("Connection error do you want to try again?")
         ans = input(str("\nY-Yes N-No->"))
         if ans == 'y' or ans == 'Y':
-            file(connection())
+            receive_file(open_connection())
         elif ans == 'N' or ans == 'n':
             exit()
 
 
-def file(s):
+def receive_file(s):
     filename = s.recv(1024)
     filename = filename.decode()
     filename = os.path.basename(filename)
@@ -48,36 +36,43 @@ def file(s):
         ans = 'N'
     s.send(ans.encode())
     if ans == 'Y':
-        filename = "Recived" + filename
+        filename = "Received" + filename
         with open(filename, 'wb') as file:
             chunk_size = 1024
             chunk_file = s.recv(chunk_size)
             file.write(chunk_file)
-            totalrecv = len(chunk_file)
-            while totalrecv < filesize:
+            total_received = len(chunk_file)
+            while total_received < filesize:
                 chunk_file = s.recv(chunk_size)
                 file.write(chunk_file)
-                totalrecv += len(chunk_file)
-                print(totalrecv * 100 / filesize)
-
+                total_received += len(chunk_file)
+                print(total_received * 100 / filesize)
         file.close()
-
         print("File has been recived.")
     else:
-        print("!!Exiting!!")
+        print("!!Exiting connection!!")
+        main()
     print("Do yo want to continue?")
-    yesorno(s)
+    ans = input(str("\nY-Yes N-No->"))
+    if ans == 'y' or ans == 'Y':
+        ans = 'Y'
+        s.send(ans.encode())
+        receive_file(s)
+    elif ans == 'N' or ans == 'n':
+        ans = 'N'
+        s.send(ans.encode())
+        s.close()
 
 
 def send_or_recv(s):
     ans = str(s.recv(1024).decode())
     if ans == "S":
-        file(s)
+        receive_file(s)
     elif ans == "R":
         send.choose_file(s)
 
 
 def join_network():
-    s = connection()
+    s = open_connection()
     send_or_recv(s)
-    file()
+    receive_file()
