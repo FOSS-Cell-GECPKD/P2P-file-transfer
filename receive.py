@@ -5,12 +5,15 @@ from peer import main
 
 
 def open_connection():  # connecting to the host
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host = input(str("Enter the host address of the sender : "))
-    port = 8080
-    s.connect((host, port))
-    print(" Connected to the host... ")
-    return s
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        host = input(str("Enter the host address of the sender : "))
+        port = 8080
+        s.connect((host, port))
+        print(" Connected to the host... ")
+        return s
+    except:
+        print("Port busy try again later")
 
 
 
