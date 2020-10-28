@@ -3,12 +3,8 @@ import receive
 
 
 def main():
-    while 1:
-        choice = input("""
-                        C: Create network
-                        J: Join network
-                        E:Exit
-                        Please enter your choice (C/J/E):""")
+    while True:
+        choice = input("\tC: Create network\n\tJ: Join network\n\tE:Exit\nPlease enter your choice (C/J/E):")
         if choice == "C" or choice == "c":
             send.create_network()
         elif choice == "J" or choice == "j":
