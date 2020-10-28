@@ -1,7 +1,7 @@
 import socket
 from _thread import *
 import os
-import recive
+import receive
 
 
 def get_ip():  # Used to get the ip address and host name for creating a network to connect
@@ -85,7 +85,7 @@ def send_or_receive(conn):  # Both peers can send and receive file
         choose_file(conn)
     elif choice == "R" or choice == "r":
         conn.send("R".encode())
-        recive.file(conn)
+        receive.file(conn)
     else:
         print("You must only select either S or R")
         print("please try again")

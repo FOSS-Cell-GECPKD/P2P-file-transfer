@@ -1,5 +1,5 @@
 import send
-import recive
+import receive
 
 
 def main():
@@ -12,7 +12,7 @@ def main():
         if choice == "C" or choice == "c":
             send.create_network()
         elif choice == "J" or choice == "j":
-            recive.join_network()
+            receive.join_network()
         elif choice == "E" or choice == "e":
             exit()
         else:
