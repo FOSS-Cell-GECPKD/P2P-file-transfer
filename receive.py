@@ -4,6 +4,21 @@ import send
 from peer import main
 
 
+def write_file(s, file_name, file_size):  # Writes into the file
+    with open(file_name, 'wb') as file:
+        chunk_size = 1024
+        chunk_file = s.recv(chunk_size)
+        file.write(chunk_file)
+        total_received = len(chunk_file)
+        while total_received < file_size:
+            chunk_file = s.recv(chunk_size)
+            file.write(chunk_file)
+            total_received += len(chunk_file)
+            print(total_received * 100 / file_size)
+    file.close()
+    print("File has been received.")
+
+
 def open_connection():  # connecting to the host
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -26,26 +41,15 @@ def receive_file(s):  # Receive file from other peer
     ans = input(str("\nY-Yes N-No->"))
     if ans == 'y' or ans == 'Y':
         ans = 'Y'
+        s.send('Y'.encode())
+        write_file(s, file_name, file_size)
     elif ans == 'N' or ans == 'n':
         ans = 'N'
-    s.send(ans.encode())
-    if ans == 'Y':  # Create and write into the file
-        with open(file_name, 'wb') as file:
-            chunk_size = 1024
-            chunk_file = s.recv(chunk_size)
-            file.write(chunk_file)
-            total_received = len(chunk_file)
-            while total_received < file_size:
-                chunk_file = s.recv(chunk_size)
-                file.write(chunk_file)
-                total_received += len(chunk_file)
-                print(total_received * 100 / file_size)
-        file.close()
-        print("File has been received.")
-    else:
+        s.send('N'.encode())
         print("!!Exiting connection!!")
         s.close()  # Ending Connection
         main()  # Going back to the beginning and start again
+
     print("Do yo want to continue?")  # Ask to know whether continue or end the file Transfer
     ans = input(str("\nY-Yes N-No->"))
     if ans == 'y' or ans == 'Y':
