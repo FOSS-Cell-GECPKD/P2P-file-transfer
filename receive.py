@@ -34,11 +34,11 @@ def receive_file(s):  # Receive file from other peer
     file_name = os.path.basename(s.recv(1024).decode())
     file_size = int(s.recv(1024).decode())
     print("Do you want to download % s of size % s" % (file_name, file_size))
-    ans = input(str("\nY-Yes N-No->"))
+    ans = input(str("\nY-Yes Other-No->"))
     if ans == 'y' or ans == 'Y':
         s.send('Y'.encode())
         write_file(s, file_name, file_size)
-    elif ans == 'N' or ans == 'n':
+    else:
         s.send('N'.encode())
         print("!!Exiting connection!!")
         s.close()  # Ending Connection
