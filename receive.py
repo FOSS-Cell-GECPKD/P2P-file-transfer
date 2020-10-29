@@ -14,7 +14,6 @@ def write_file(s, file_name, file_size):  # Writes into the file
             chunk_file = s.recv(chunk_size)
             file.write(chunk_file)
             total_received += len(chunk_file)
-            print(total_received * 100 / file_size)
     file.close()
     print("File has been received.")
 
