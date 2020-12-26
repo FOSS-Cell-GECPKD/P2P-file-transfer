@@ -31,7 +31,7 @@ If you don't see your idea listed, do one of the following:
 * **If your contribution is major,** such as a new feature/enhancement, start by opening an issue first. This way, other people can be also involved in the discussion before you do any work.
 
 ### Community
-Discussions about P2P-file-transfer is placed on our Gitter Chat Anyone is welcome to join these conversations.
+Discussions about P2P-file-transfer take place on our Gitter Chat. Anyone is welcome to join the conversation.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
