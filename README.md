@@ -35,3 +35,5 @@ Discussions about P2P-file-transfer take place on our Gitter Chat. Anyone is wel
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+
+This project was a part of FOSS OpenHack '20: https://openhack.gitbook.io/openhack-20/.
